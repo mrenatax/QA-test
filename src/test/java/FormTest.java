@@ -1,4 +1,4 @@
 import org.testng.annotations.*;
 
-public class LoginTest {
+public class FormTest {
 }
