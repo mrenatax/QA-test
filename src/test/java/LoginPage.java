@@ -18,7 +18,10 @@ public class LoginPage {
     private WebElement passwordField;
 
     @FindBy(xpath = "//button[@id = 'authButton']")
-    private WebElement loginBtn;
+    private WebElement loginButton;
+
+    @FindBy(xpath = "//div[@id='invalidEmailPassword']")
+    private WebElement errorMessage;
 
     public void inputEmail(String login) {
         emailField.sendKeys(login);
@@ -28,7 +31,11 @@ public class LoginPage {
         passwordField.sendKeys(passwd);
     }
 
-    public void clickLoginBtn() {
-        loginBtn.click();
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public String getErrorMessage() {
+        return errorMessage.getText();
     }
 }

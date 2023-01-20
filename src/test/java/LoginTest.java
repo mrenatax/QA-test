@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     public static LoginPage loginPage;
-    //public static FormPage formPage;
     public static WebDriver driver;
 
     @BeforeClass
@@ -23,12 +23,27 @@ public class LoginTest {
         driver.get(sampleFile.toUri().toString());
     }
 
+    /**
+     * Тест с неверным email и паролем
+     */
     @Test
-    public void loginTest() {
+    public void loginTestNegative() {
+        loginPage.inputEmail(ConfProperties.getProperty("incorrectLoginEmail"));
+        loginPage.clickLoginButton();
+        loginPage.inputPasswd(ConfProperties.getProperty("incorrectPassword"));
+        loginPage.clickLoginButton();
+        Assert.assertEquals(loginPage.getErrorMessage(), "Неверный E-Mail или пароль");
+    }
+
+    /**
+     * Тест с валидными данными
+     */
+    @Test
+    public void loginTestPositive() {
         loginPage.inputEmail(ConfProperties.getProperty("email"));
-        loginPage.clickLoginBtn();
+        loginPage.clickLoginButton();
         loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickLoginBtn();
+        loginPage.clickLoginButton();
     }
 
     @AfterClass

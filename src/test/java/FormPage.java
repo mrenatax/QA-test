@@ -4,30 +4,46 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class FormPage {
-
     public WebDriver driver;
+
+    @FindBy(xpath = "//div[@id='emailFormatError']")
+    private WebElement errorMessage;
 
     public FormPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//*[contains(@class, 'account__name_hasAccentLetter')]")
-    private WebElement userMenu;
+    @FindBy(xpath = "//input[@id = 'dataEmail']")
+    private WebElement emailField;
 
-    @FindBy(xpath = "//*[contains(@class, 'menu-item_action_exit menu__item menu__item_type_link')]")
-    private WebElement logoutBtn;
+    @FindBy(xpath = "//input[@id = 'dataName']")
+    private WebElement nameField;
 
-    public String getUserName() {
-        String userName = userMenu.getText();
-        return userName;
+    @FindBy(xpath = "//button[@id = 'dataSend']")
+    private WebElement addButton;
+
+    @FindBy(xpath = "//button[text()='Ok']")
+    private WebElement okButton;
+
+    public void inputEmail(String email) {
+        emailField.sendKeys(email);
     }
 
-    public void entryMenu() {
-        userMenu.click();
+    public void inputName(String name) {
+        nameField.sendKeys(name);
     }
 
-    public void userLogout() {
-        logoutBtn.click();
+    public void clickAddButton() {
+        addButton.click();
     }
+
+    public void clickOkButton() {
+        okButton.click();
+    }
+
+    public String getErrorMessage() {
+        return errorMessage.getText();
+    }
+
 }
