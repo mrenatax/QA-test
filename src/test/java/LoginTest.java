@@ -2,7 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.openqa.selenium.TakesScreenshot;
+
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
